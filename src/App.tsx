@@ -1,57 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { lazy, Suspense, useState } from 'react';
+import 'assets/scss/app.scss';
+import Header from './components/Header';
+import { Route, Routes } from 'react-router-dom';
+import Loader from './components/Loader';
+import { PageContext } from './assets/context/pagesContext';
+import NotFoundPage from './pages/NotFoundPage';
+import { useAuth0 } from '@auth0/auth0-react';
+import Empty from './components/Empty';
+import Button from './components/Button';
+
+const HomePage = lazy(() => import('pages/HomePage'));
+const FavoritesPage = lazy(() => import('pages/FavoritesPage'));
+const DetailsPage = lazy(() => import('pages/DetailsPage'));
 
 function App() {
+  const [page, setPage] = useState<number>(1);
+
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <PageContext.Provider value={{ page, setPage }}>
+      <div className='wrapper'>
+        {isAuthenticated ? (
+          <>
+            <Header />
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <HomePage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/:id'
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <DetailsPage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='/favorites'
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <FavoritesPage />
+                  </Suspense>
+                }
+              />
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+          </>
+        ) : (
+          <Empty>
+            <Button onClick={() => loginWithRedirect()}>Login</Button>
+          </Empty>
+        )}
+      </div>
+    </PageContext.Provider>
   );
 }
 

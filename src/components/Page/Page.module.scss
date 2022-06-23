@@ -1,0 +1,10 @@
+@import "src/assets/scss/variables";
+
+.root {
+  padding: 40px 0;
+
+  &__container {
+    width: $container-width;
+    margin: 0 auto;
+  }
+}

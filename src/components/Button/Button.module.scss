@@ -1,0 +1,21 @@
+@import "src/assets/scss/variables";
+
+.root {
+  border: 1px solid $yellow;
+  border-radius: 5px;
+  box-shadow: 2px 5px 25px -3px rgba($black, .25);
+
+  padding: 5px 10px;
+
+  background-color: #ffffff;
+  color: $black;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+  &:hover {
+    background-color: $yellow;
+    color: #ffffff;
+  }
+}

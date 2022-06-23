@@ -1,0 +1,13 @@
+.root {
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}

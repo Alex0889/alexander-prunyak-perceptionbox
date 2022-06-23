@@ -1,0 +1,14 @@
+.root {
+  position: relative;
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__favBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}

@@ -1,0 +1,36 @@
+@import "src/assets/scss/variables";
+
+.root {
+  &__btn {
+    margin-bottom: 20px;
+  }
+
+  &__bottom {
+    display: flex;
+  }
+
+  &__hero {
+    margin-right: 60px;
+  }
+
+  &__list {
+    width: 400px;
+    height: 200px;
+    margin: 10px 0;
+    overflow-y: scroll;
+
+    border: 1px solid $gray-light;
+  }
+
+  &__status {
+    font-weight: 700;
+
+    &_alive {
+      color: #079600;
+    }
+
+    &_dead {
+      color: #ff0000;
+    }
+  }
+}

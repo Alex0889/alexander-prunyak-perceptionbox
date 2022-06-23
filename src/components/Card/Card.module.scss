@@ -1,0 +1,25 @@
+@import 'src/assets/scss/variables';
+
+.root {
+  width: 280px;
+  border: 1px solid $gray-light;
+
+  text-align: center;
+  margin-bottom: 65px;
+  cursor: pointer;
+  transition: box-shadow .3s;
+
+  &:hover {
+    box-shadow: 0 3px 20px rgba(#000, .3);
+  }
+
+  &__image {
+    width: 260px;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 20px 0;
+  }
+}
